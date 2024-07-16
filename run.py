@@ -15,8 +15,16 @@ def main():
     user_input = st.text_area("Enter a word or sentence:")
     
     # Dropdown for selecting target language
-    languages = ['ar', 'fr', 'es', 'de']  # Example languages
-    target_language = st.selectbox("Select target language:", languages)
+    # List of languages supported by LibreTranslate (you can customize this list)
+    supported_languages = {
+                'English': 'en',
+                'French': 'fr',
+                'German': 'de',
+                'Arabic': 'ar'
+                     }
+    
+   
+    target_language = st.selectbox("Select target language:", list(supported_languages.keys()) )
     
     if st.button("Translate"):
         if user_input:
@@ -28,7 +36,7 @@ def main():
                 translated_text = lt.translate(user_input, detected_language, target_language)
                 
                 # Display translated text
-                st.success(f"Translated Text: {translated_text}")
+                st.success(f"Translated Text \n: {translated_text}")
                 
             except RequestException as e:
                 st.error(f"Error: {e}")
